@@ -2,6 +2,7 @@ import os
 import joblib
 import pandas as pd
 from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score
 
 
 MODELS_DIR = 'models/'
@@ -17,9 +18,9 @@ class Model:
       self.model = None
 
   def fit(self):
-    X = self.df.drop(['Species', 'Id'], axis=1)
-    y = self.df['Species']
-    self.model = DecisionTreeClassifier().fit(X, y)
+    self.X = self.df.drop(['Species', 'Id'], axis=1)
+    self.y = self.df['Species']
+    self.model = DecisionTreeClassifier().fit(self.X, self.y)
     joblib.dump(self.model, MODELS_DIR + 'iris.model')
 
   def predict(self, measurement):
@@ -35,6 +36,15 @@ class Model:
 if __name__ == '__main__':
   m = Model()
   m.fit()
-  x = [5.1, 3.5, 1.4, 0.2]
-  print('Predict for ' + str(x))
-  print('Prediction ' + str(m.predict(x)))
+
+  y_true = m.y
+  y_pred = m.model.predict(m.X)
+
+  accucary = accuracy_score(y_true, y_pred)
+
+  with open("model/metrics.txt", 'w') as outfile:
+    outfile.write(f"Model accuracy {accucary}\n")
+
+  # x = [5.1, 3.5, 1.4, 0.2]
+  # print('Predict for ' + str(x))
+  # print('Prediction ' + str(m.predict(x)))
