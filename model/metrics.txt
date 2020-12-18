@@ -1,1 +1,1 @@
-Model accuracy 1.0
+Model accuracy 0.6666666666666666

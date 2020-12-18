@@ -3,6 +3,8 @@ import joblib
 import pandas as pd
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import accuracy_score
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 
 MODELS_DIR = 'models/'
@@ -41,6 +43,26 @@ if __name__ == '__main__':
   y_pred = m.model.predict(m.X)
 
   accucary = accuracy_score(y_true, y_pred)
+
+  importances = m.model.feature_importances_
+
+  labels = m.X.columns
+  feature_df = pd.DataFrame(list(zip(labels, importances)), columns = ["feature","importance"])
+  feature_df = feature_df.sort_values(by='importance', ascending=False)
+
+  sns.set(style="whitegrid")
+
+  axis_fs = 18
+  title_fs = 22
+
+  ax = sns.barplot(x="importance", y="feature", data=feature_df)
+  ax.set_xlabel('Importance',fontsize = axis_fs) 
+  ax.set_ylabel('Feature', fontsize = axis_fs)
+  ax.set_title('DecisionTreeClassifier\nfeature importance', fontsize = title_fs)
+
+  plt.tight_layout()
+  plt.savefig("model/feature_importance.png",dpi=120) 
+  plt.close()
 
   with open("model/metrics.txt", 'w') as outfile:
     outfile.write(f"Model accuracy {accucary}\n")
