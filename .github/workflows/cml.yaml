@@ -21,5 +21,8 @@ jobs:
           echo "## Model metrics" > report.md
           cat model/metrics.txt >> report.md
 
+          echo "## Feature importance" >> report.md
+          cml-publish model/feature_importance.png --md >> report.md
+
           cml-send-comment report.md
           
