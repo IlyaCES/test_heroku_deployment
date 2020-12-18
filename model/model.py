@@ -20,7 +20,7 @@ class Model:
   def fit(self):
     self.X = self.df.drop(['Species', 'Id'], axis=1)
     self.y = self.df['Species']
-    self.model = DecisionTreeClassifier().fit(self.X, self.y)
+    self.model = DecisionTreeClassifier(max_depth=1).fit(self.X, self.y)
     joblib.dump(self.model, MODELS_DIR + 'iris.model')
 
   def predict(self, measurement):
