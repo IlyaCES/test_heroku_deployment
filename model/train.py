@@ -1,0 +1,12 @@
+from sklearn.tree import DecisionTreeClassifier
+import pandas as pd
+import joblib
+
+
+df = pd.read_csv('dataset/data_train.csv')
+X = df.drop('y', axis=1)
+y = df['y']
+
+
+model = DecisionTreeClassifier().fit(X, y)
+joblib.dump(model, 'models/m.model')
