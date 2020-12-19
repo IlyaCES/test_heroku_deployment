@@ -1,4 +1,6 @@
 stages:
+  get_data:
+    cmd: dvc pull dataset/data.csv
   preprocess:
     cmd: python model/preprocess.py
     deps:
