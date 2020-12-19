@@ -13,5 +13,5 @@ train_df['y'] = y_train
 test_df = pd.DataFrame(X_test)
 test_df['y'] = y_test
 
-train_df.to_csv('dataset/data_train.csv')
-test_df.to_csv('dataset/data_test.csv')
+train_df.to_csv('dataset/data_train.csv', index=False)
+test_df.to_csv('dataset/data_test.csv', index=False)

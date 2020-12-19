@@ -9,5 +9,5 @@ X, y = make_classification(n_samples=100000, n_features=10,
 df = pd.DataFrame(X)
 df['y'] = y
 
-df.to_csv('dataset/data.csv')
+df.to_csv('dataset/data.csv', index=False)
 print(df.head())

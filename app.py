@@ -8,6 +8,7 @@ from model.model import Model
 app = Flask(__name__)
 api = Api(app)
 
+model = Model()
 
 
 class Predict(Resource):
@@ -17,12 +18,10 @@ class Predict(Resource):
 
     X = [data[v] for v in '0,1,2,3,4,5,6,7,8,9'.split(',')]
 
-    m = Model()
-
-    prediction = m.predict(X)
+    prediction = model.predict(X)
 
     return jsonify({
-      'Class': prediction
+      'Class': int(prediction)
     })
     
 
