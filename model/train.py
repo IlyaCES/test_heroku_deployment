@@ -8,5 +8,5 @@ X = df.drop('y', axis=1)
 y = df['y']
 
 
-model = DecisionTreeClassifier(max_depth=5).fit(X, y)
+model = DecisionTreeClassifier(max_depth=8).fit(X, y)
 joblib.dump(model, 'models/m.model')
