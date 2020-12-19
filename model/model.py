@@ -1,5 +1,6 @@
 import dvc.api
 import joblib
+import os
 
 
 class Model:
@@ -7,7 +8,11 @@ class Model:
     # with dvc.api.open('models/m.model') as f:
     #   self.model = joblib.load(f)
     # self.model = dvc.api.read('models/m.model')
-    self.model = joblib.load('models/m.model')
+    try:
+      self.model = joblib.load('models/m.model')
+    except:
+      os.system('dvc pull models/m.model')
+      self.model = joblib.load('models/m.model')
 
   def predict(self, X):
     if self.model is None:
