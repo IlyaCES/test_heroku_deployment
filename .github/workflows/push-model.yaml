@@ -10,12 +10,15 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Get model
+        env:
+          GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
         run: |
           pip install -r requirements.txt
           dvc repro
       - name: Commit report
         run: |
-          git config --global user.name 'IlyaCes'
-          git config --global user.email 'your-username@users.noreply.github.com'
-          git commit am "Model added"
+          git config --global user.name 'IlyaCES'
+          git config --global user.email 'IlyaCES@users.noreply.github.com'
+          git add models/m.model
+          git commit -m "Model added"
           git push
