@@ -1,0 +1,20 @@
+name: push-model
+on: 
+  push:
+    branches:
+      - master
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Get model
+        run:
+          pip install -r requirements.txt
+          dvc repro
+      - name: Commit report
+        run: |
+          git config --global user.name 'IlyaCes'
+          git config --global user.email 'your-username@users.noreply.github.com'
+          git commit am "Model added"
+          git push
