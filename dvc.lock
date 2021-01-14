@@ -1,0 +1,37 @@
+preprocess:
+  cmd: python model/preprocess.py
+  deps:
+  - path: dataset/data.csv
+    md5: 8010ce58a6c2bd6e97f8b8b20831f9c8
+    size: 19757046
+  - path: model/preprocess.py
+    md5: dcc8c7bd0321cac7b69be62002d3fa10
+    size: 459
+  outs:
+  - path: dataset/data_test.csv
+    md5: 666da5ecb05bb8552a75a613598557c9
+    size: 4933035
+  - path: dataset/data_train.csv
+    md5: 168a725170c418cd4a8229578cdb63bc
+    size: 14799983
+train:
+  cmd: python model/train.py
+  deps:
+  - path: dataset/data_train.csv
+    md5: 168a725170c418cd4a8229578cdb63bc
+    size: 14799983
+val:
+  cmd: python model/val.py
+  deps:
+  - path: dataset/data_test.csv
+    md5: 5af1fccad09edc24b2682cbee2f20c08
+    size: 4934576
+  outs:
+  - path: model/confusion_matrix.png
+    md5: 533a851a91d1ab4938a3773912bbb39d
+    size: 31663
+  - path: model/metrics.json
+    md5: 3e98b372f6f84c4ac4a1857e9a50c637
+    size: 52
+get_data:
+  cmd: dvc pull dataset/data.csv
