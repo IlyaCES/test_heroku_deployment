@@ -11,6 +11,6 @@ stages:
     cmd: python model/train.py
     deps:
     - dataset/data_train.csv
-    outs:
-    - models/m.model
+    # outs:
+    # - models/m.model
 
