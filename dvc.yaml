@@ -13,4 +13,12 @@ stages:
     - dataset/data_train.csv
     # outs:
     # - models/m.model
-
+  val:
+    cmd: python model/val.py
+    deps:
+    - dataset/data_test.csv
+    outs:
+    - model/confusion_matrix.png
+    metrics:
+    - model/metrics.json:
+        cache: false
